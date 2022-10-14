@@ -21,14 +21,13 @@ class Handler implements URLHandler {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
-                if (parameters[0].equals("s")) {
-                    words.add(parameters[1]);
-                    return String.format("Added: %s", parameters[1]);
-                }
+                words.add(parameters[1]);
+                    return String.format("Word added");
+                
             }
             if (url.getPath().contains("/search")) {
                 String[] parameters = url.getQuery().split("=");
-                if (parameters[0].equals("s")) {
+
                     for (int i = 0; i < words.size(); i++) {
                         if (words.get(i).contains(parameters[1])) {
                             lookup.add(words.get(i));
@@ -39,9 +38,9 @@ class Handler implements URLHandler {
                 }
             }
             return "404 Not Found!";
-        }
     }
 }
+
 
 class SearchEngine {
     public static void main(String[] args) throws IOException {
