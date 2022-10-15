@@ -13,17 +13,17 @@ class Handler implements URLHandler {
 
         words.clear();
         lookup.clear();
-        
+
         if (url.getPath().equals("/")) {
-            return String.format("Search Engine");
-            
+            return String.format("Search Engine Activated");
+
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 words.add(parameters[1]);
-                    return String.format("Word added");
-                
+                    return String.format("Word added", parameters[1]);
+
             }
             if (url.getPath().contains("/search")) {
                 String[] parameters = url.getQuery().split("=");
@@ -33,7 +33,7 @@ class Handler implements URLHandler {
                             lookup.add(words.get(i));
                         }
                     }
-                    return String.format(Arrays.toString(lookup.toArray()));
+                        return String.format(Arrays.toString(lookup.toArray()));
 
                 }
             }
@@ -48,9 +48,7 @@ class SearchEngine {
             System.out.println("Missing port number, try any number between 1024 to 49151");
             return;
         }
-        
         int val = Integer.parseInt(args[0]);
-
         Server.start(val, new Handler());
     }
 }
